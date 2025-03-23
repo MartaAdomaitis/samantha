@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "node --watch --no-warnings ./main/server.js",
-    "prettier": "npx prettier . --write"
+    "prettier": "npx prettier . --write",
+    "migrate-up": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
