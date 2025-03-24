@@ -1,7 +1,8 @@
-import { User } from "@prisma/client";
+
+import { User } from "../../../domain/entities/user";
 import { IUserRepository } from "../../interfaces/i-user-repository";
 
-export default class UpdateUser {
+export default class UpdateUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
   public async execute(user: User): Promise<void> {

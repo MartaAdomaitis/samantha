@@ -1,16 +1,27 @@
 import { IUserRepository } from "../../../application/interfaces/i-user-repository";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { User } from "../../../domain/entities/user";
 
 const prisma = new PrismaClient();
 
 export default class UserRepository implements IUserRepository {
   public async find(userId: string): Promise<User | null> {
-    const users = await prisma.user.findFirst({ where: { id: userId } });
-    return users;
+    const user = await prisma.user.findFirst({ where: { id: userId } });
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   }
   public async findByEmail(email: string): Promise<User | null> {
-    const users = await prisma.user.findFirst({ where: { email } });
-    return users;
+    const user = await prisma.user.findFirst({ where: { email } });
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   }
   public async create(user: User): Promise<void> {
     await prisma.user.create({ data: user });
