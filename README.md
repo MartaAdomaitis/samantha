@@ -2,32 +2,54 @@
 
 ## How to use the project
 
-Create an .env file using the keys and values from the .env.test file. Make sure to provide values for any keys that are empty.
+1. Create an `.env` file using the keys and values from the `.env.test` file. Make sure to provide values for any keys that are empty.
 
-## Run project
+## First time setup
 
-In the command line terminal, run the following commands:
+Run the following commands in order:
 
+```bash
 # Install dependencies
+npm i
 
-$ npm i
+# Generate Prisma client
+npm run prisma:generate
 
-# Run for local development
+# Create and start the database
+docker-compose up -d
 
-$ npm run dev
+# Run database migrations
+npm run migrate-up
 
-Install new dependencies
+# Start the development server
+npm run dev
+```
 
-# Install new dependency
+## Useful commands
 
-$ npm install ...
+```bash
+# Start the development server
+npm run dev
 
-Database project
+# Start database and server
+npm run setup
 
-# Database's image creation
+# Install a new dependency
+npm install ...
 
-$ docker-compose up -d
+# Generate Prisma client (use only when needed)
+npm run prisma:generate
+
+# Open Prisma Studio to view/edit data
+npm run prisma:studio
+```
+
+## Database
+
+```bash
+# Create and start database container
+docker-compose up -d
 
 # Run migrations
-
-$ npm run migrate-up
+npm run migrate-up
+```
