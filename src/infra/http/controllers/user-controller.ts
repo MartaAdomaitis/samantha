@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { User } from "../../domain/entities/user";
-import GetUserFactory from "../factories/get-user-factory";
-import CreateUserFactory from "../factories/create-user-factory";
-import UpdateUserFactory from "../factories/update-user-factory";
-import DeleteUserFactory from "../factories/delete-user-factory";
+import { User } from "../../../domain/entities/user";
+import GetUserFactory from "../../factories/get-user-factory";
+import CreateUserFactory from "../../factories/create-user-factory";
+import UpdateUserFactory from "../../factories/update-user-factory";
+import DeleteUserFactory from "../../factories/delete-user-factory";
 
 export interface GetUserParams {
   id: string;
@@ -68,7 +68,7 @@ export default class UserController {
       const userId = request.params.id;
 
       if (!body.name || !body.email || !body.password) {
-        throw Error("Missing user creation params");
+        throw Error("Missing user update params");
       }
 
       const updateUserUseCase = new UpdateUserFactory().make();

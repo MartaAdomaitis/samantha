@@ -1,9 +1,6 @@
 import fastify from "fastify";
-import UserController, {
-  GetUserParams,
-  CreateUserBody,
-  UpdateUserBody,
-} from "../src/infra/controllers/user-controller";
+import userRoutes from "../src/infra/http/routes/user-routes";
+import { env } from "../src/infra/config/env"
 
 export const server = fastify();
 
@@ -11,30 +8,13 @@ server.get("/", (_request, response) => {
   return response.status(200).send("Server is ok!");
 });
 
-server.get<{ Params: GetUserParams }>(
-  "/users/:id",
-  async (request, response) => {
-    return new UserController().get(request, response);
-  },
-);
-
-server.post<{ Body: CreateUserBody }>("/users", async (request, response) => {
-  return new UserController().create(request, response);
-});
-
-server.put<{ Body: UpdateUserBody, Params: {id: string} }>("/users/:id", async (request, response) => {
-  return new UserController().update(request, response);
-});
-
-server.delete<{ Params: {id: string} }>("/users/:id", async (request, response) => {
-  return new UserController().delete(request, response);
-});
+server.register(userRoutes);
 
 server.listen(
   {
-    port: 3333,
+    port: env.PORT,
   },
   () => {
-    console.log("Server is running on port 3333");
+    console.log(`Server is running on port ${env.PORT}`);
   },
 );

@@ -12,4 +12,8 @@ export class User {
     const id = randomUUID();
     return new User(id, name, email, password);
   }
+
+  static update(id: string, name: string, email: string, password: string): User {
+    return new User(id, name, email, password);
+  }
 }
