@@ -2,6 +2,7 @@ import fastify from "fastify";
 import UserController, {
   GetUserParams,
   CreateUserBody,
+  UpdateUserBody,
 } from "../src/infra/controllers/user-controller";
 
 export const server = fastify();
@@ -13,20 +14,20 @@ server.get("/", (_request, response) => {
 server.get<{ Params: GetUserParams }>(
   "/users/:id",
   async (request, response) => {
-    return new UserController().getUser(request, response);
+    return new UserController().get(request, response);
   },
 );
 
 server.post<{ Body: CreateUserBody }>("/users", async (request, response) => {
-  return new UserController().createUser(request, response);
+  return new UserController().create(request, response);
 });
 
-server.put("/users/:id", () => {
-  return "Server is up";
+server.put<{ Body: UpdateUserBody, Params: {id: string} }>("/users/:id", async (request, response) => {
+  return new UserController().update(request, response);
 });
 
-server.delete("/users/:id", () => {
-  return "Server is up";
+server.delete<{ Params: {id: string} }>("/users/:id", async (request, response) => {
+  return new UserController().delete(request, response);
 });
 
 server.listen(
