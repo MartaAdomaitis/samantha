@@ -42,7 +42,7 @@ export default class UserController {
   public async create(
     request: FastifyRequest<{ Body: CreateUserBody }>,
     response: FastifyReply,
-  ): Promise<User> {
+  ): Promise<void> {
     try {
       const body = request.body;
 
@@ -62,7 +62,7 @@ export default class UserController {
   public async update(
     request: FastifyRequest<{ Body: UpdateUserBody, Params: {id: string} }>,
     response: FastifyReply,
-  ): Promise<User> {
+  ): Promise<void> {
     try {
       const body = request.body;
       const userId = request.params.id;
@@ -83,7 +83,7 @@ export default class UserController {
   public async delete(
     request: FastifyRequest<{ Params: {id: string} }>,
     response: FastifyReply,
-  ): Promise<User> {
+  ): Promise<void> {
     try {
       const userId = request.params.id;
 
