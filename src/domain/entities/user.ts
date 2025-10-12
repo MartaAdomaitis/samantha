@@ -16,4 +16,12 @@ export class User {
   static update(id: string, name: string, email: string, password: string): User {
     return new User(id, name, email, password);
   }
+
+  static getAll(data: {id: string, name: string, email: string}[]) {
+    const users = [];
+    for (const user of data) {
+      users.push({ id: user.id, name: user.name, email: user.email });
+    }
+    return users;
+  } 
 }

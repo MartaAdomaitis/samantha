@@ -12,7 +12,12 @@ async function userRoutes(fastify: FastifyInstance) {
       return new UserController().get(request, response);
     },
   );
-  
+  fastify.get<{ Params: GetUserParams }>(
+    "/users",
+    async (request, response) => {
+      return new UserController().getAll(request, response);
+    },
+  );
   fastify.post<{ Body: CreateUserBody }>("/users", async (request, response) => {
     return new UserController().create(request, response);
   });

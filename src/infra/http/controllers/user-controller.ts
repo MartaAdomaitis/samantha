@@ -4,6 +4,7 @@ import GetUserFactory from "../../factories/get-user-factory";
 import CreateUserFactory from "../../factories/create-user-factory";
 import UpdateUserFactory from "../../factories/update-user-factory";
 import DeleteUserFactory from "../../factories/delete-user-factory";
+import GetAllUserFactory from "../../factories/get-all-user-factory";
 
 export interface GetUserParams {
   id: string;
@@ -33,7 +34,20 @@ export default class UserController {
       const getUserUseCase = new GetUserFactory().make();
       const user = await getUserUseCase.execute(userId);
 
-      return response.status(200).send(user);
+      return response.status(200).send({ name: user?.name, email: user?.email });
+    } catch (error) {
+      return response.status(500).send(error);
+    }
+  }
+
+  public async getAll(
+    _request: FastifyRequest,
+    response: FastifyReply,
+  ): Promise<void> {
+    try {
+      const getAllUserUseCase = new GetAllUserFactory().make();
+      const users = await getAllUserUseCase.execute();
+      return response.status(200).send(users);
     } catch (error) {
       return response.status(500).send(error);
     }
