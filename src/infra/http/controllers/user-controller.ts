@@ -5,7 +5,12 @@ import CreateUserFactory from "../../factories/create-user-factory";
 import UpdateUserFactory from "../../factories/update-user-factory";
 import DeleteUserFactory from "../../factories/delete-user-factory";
 import GetAllUserFactory from "../../factories/get-all-user-factory";
+import LoginFactory from "../../factories/login-factory";
 
+export interface LoginBody {
+  email: string;
+  password: string;
+}
 export interface GetUserParams {
   id: string;
 }
@@ -24,6 +29,17 @@ export interface UpdateUserBody {
 }
 
 export default class UserController {
+  public async login(request: FastifyRequest<{ Body: LoginBody }>, response: FastifyReply): Promise<void> {
+    try {
+      const body = request.body;
+      const loginUseCase = new LoginFactory().make();
+      const token = await loginUseCase.execute(body.email, body.password);
+      return response.status(200).send(token);
+    } catch (error) {
+      return response.status(500).send(error);
+    }
+  }
+
   public async get(
     request: FastifyRequest<{ Params: GetUserParams }>,
     response: FastifyReply,

@@ -13,9 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id      String      @id
-  email   String   @unique
-  name    String
-  password String 
+model User {
+  id        String   @id
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  tokens    Token[]
+
+  @@map("users")
+}
+
+model Token {
+  id        String   @id
+  userId    String
+  token     String   @unique
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("tokens")
 }
