@@ -10,15 +10,6 @@ server.get("/", (_request, response) => {
 
 server.register(userRoutes);
 
-server.listen(
-  {
-    port: env.PORT,
-  },
-  (err) => {
-    if (err) {
-      console.error('Erro ao iniciar servidor:', err);
-      process.exit(1);
-    }
-    console.log(`Server is running on ${env.PORT}`);
-  },
-);
+server.listen({ port: env.PORT }, () => { 
+  console.log(`🚀 Server is running on port ${env.PORT}`);
+});
