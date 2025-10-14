@@ -5,6 +5,7 @@ dotenv.config();
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(3333),
+  SOCKET_PORT: z.coerce.number().default(3334),
   DATABASE_URL: z.string().url(),
   JWT_SECRET: z.string().min(10),
   BCRYPT_SALT_ROUNDS: z.coerce.number().default(8),
