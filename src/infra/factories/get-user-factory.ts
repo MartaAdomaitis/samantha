@@ -1,4 +1,4 @@
-import GetUserUseCase from "../../application/use-case/users/get-user";
+import GetUserUseCase from "../../application/use-cases/users/get-user";
 import UserRepositoryFactory from "../database/factories/user-repository-factory";
 
 export default class GetUserFactory {

@@ -20,6 +20,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@langchain/community": "^0.3.57",
+    "@langchain/core": "^0.3.78",
+    "@langchain/langgraph": "^0.4.9",
+    "@langchain/openai": "^0.6.16",
     "@prisma/client": "^6.8.2",
     "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",

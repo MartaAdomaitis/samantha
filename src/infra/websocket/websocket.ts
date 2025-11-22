@@ -19,7 +19,7 @@ export default class Websocket {
         console.log("   - Room ID:", data.roomId);
         console.log("   - Socket ID:", socket.id);
         console.log("   - Timestamp:", data.timestamp);
-        // TO DO: add message treatment service
+        // TODO: add message treatment service
         
         socket.to(data.roomId).emit("message", {
           message: data.message,
