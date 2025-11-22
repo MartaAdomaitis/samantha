@@ -7,21 +7,21 @@ import DeleteUserFactory from "../../factories/delete-user-factory";
 import GetAllUserFactory from "../../factories/get-all-user-factory";
 import LoginFactory from "../../factories/login-factory";
 
-export interface LoginBody {
+export interface ILoginBody {
   email: string;
   password: string;
 }
-export interface GetUserParams {
+export interface IGetUserParams {
   id: string;
 }
 
-export interface CreateUserBody {
+export interface ICreateUserBody {
   name: string;
   email: string;
   password: string;
 }
 
-export interface UpdateUserBody {
+export interface IUpdateUserBody {
   id: string;
   name: string;
   email: string;
@@ -29,7 +29,7 @@ export interface UpdateUserBody {
 }
 
 export default class UserController {
-  public async login(request: FastifyRequest<{ Body: LoginBody }>, response: FastifyReply): Promise<void> {
+  public async login(request: FastifyRequest<{ Body: ILoginBody }>, response: FastifyReply): Promise<void> {
     try {
       const body = request.body;
       const loginUseCase = new LoginFactory().make();
@@ -41,7 +41,7 @@ export default class UserController {
   }
 
   public async get(
-    request: FastifyRequest<{ Params: GetUserParams }>,
+    request: FastifyRequest<{ Params: IGetUserParams }>,
     response: FastifyReply,
   ): Promise<User> {
     try {
@@ -70,7 +70,7 @@ export default class UserController {
   }
 
   public async create(
-    request: FastifyRequest<{ Body: CreateUserBody }>,
+    request: FastifyRequest<{ Body: ICreateUserBody }>,
     response: FastifyReply,
   ): Promise<void> {
     try {
@@ -90,7 +90,7 @@ export default class UserController {
   }
 
   public async update(
-    request: FastifyRequest<{ Body: UpdateUserBody, Params: {id: string} }>,
+    request: FastifyRequest<{ Body: IUpdateUserBody, Params: {id: string} }>,
     response: FastifyReply,
   ): Promise<void> {
     try {

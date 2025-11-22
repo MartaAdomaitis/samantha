@@ -1,4 +1,4 @@
-import DeleteUserUseCase from "../../application/use-case/users/delete-user";
+import DeleteUserUseCase from "../../application/use-cases/users/delete-user";
 import UserRepositoryFactory from "../database/factories/user-repository-factory";
 
 export default class DeleteUserFactory {

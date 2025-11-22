@@ -1,20 +1,20 @@
 import { FastifyInstance } from "fastify";
 import UserController, {
-    GetUserParams,
-    CreateUserBody,
-    UpdateUserBody,
-    LoginBody,
+    IGetUserParams,
+    ICreateUserBody,
+    IUpdateUserBody,
+    ILoginBody,
   } from "../controllers/user-controller";
 import AuthenticationMiddleware from "../middlewares/authentication";
 
 async function userRoutes(fastify: FastifyInstance) {
-  fastify.post<{ Body: LoginBody }>(
+  fastify.post<{ Body: ILoginBody }>(
     "/users/login", 
     async (request, response) => {
     return new UserController().login(request, response);
   });
   
-  fastify.get<{ Params: GetUserParams }>(
+  fastify.get<{ Params: IGetUserParams }>(
     "/users/:id",
     { preHandler: AuthenticationMiddleware },
     async (request, response) => {
@@ -22,7 +22,7 @@ async function userRoutes(fastify: FastifyInstance) {
     },
   );
 
-  fastify.get<{ Params: GetUserParams }>(
+  fastify.get<{ Params: IGetUserParams }>(
     "/users",
     { preHandler: AuthenticationMiddleware },
     async (request, response) => {
@@ -30,13 +30,13 @@ async function userRoutes(fastify: FastifyInstance) {
     },
   );
 
-  fastify.post<{ Body: CreateUserBody }>(
+  fastify.post<{ Body: ICreateUserBody }>(
     "/users", 
     async (request, response) => {
     return new UserController().create(request, response);
   });
   
-  fastify.put<{ Body: UpdateUserBody, Params: {id: string} }>(
+  fastify.put<{ Body: IUpdateUserBody, Params: {id: string} }>(
     "/users/:id", 
     { preHandler: AuthenticationMiddleware },
     async (request, response) => {

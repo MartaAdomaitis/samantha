@@ -1,4 +1,4 @@
-import UserRepository from "../repositories/user-repository";
+import UserRepository from "../../database/repositories/user-repository";
 
 class UserRepositoryFactory {
   public make() {
