@@ -27,7 +27,7 @@ export class Message {
     const updatedAt = new Date(); 
     const deletedAt = null;
 
-    return new Message(id, userId, body, senderType, createdAt, updatedAt, deletedAt);
+    return new Message(id, userId, body, senderType, updatedAt, createdAt, deletedAt);
   }
 
   static update({id, userId, body, senderType}: IMessage) {

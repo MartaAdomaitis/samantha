@@ -1,7 +1,6 @@
 import { User } from "../../../domain/entities/user";
 import { IUserRepository } from "../../interfaces/i-user-repository";
-import bcrypt from "bcrypt";
-import { env } from "../../../infra/config/env";
+import { IHashProvider } from "../../providers/i-hash-provider";
 
 export type Input = {
   name: string;
@@ -10,7 +9,10 @@ export type Input = {
 };
 
 export default class CreateUserUseCase {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+    private hashProvider: IHashProvider
+  ) {}
 
   public async execute(user: Input): Promise<void> {
       const userExist = await this.userRepository.findByEmail(user.email);
@@ -19,8 +21,8 @@ export default class CreateUserUseCase {
         throw new Error("User already exists");
       }
 
-      const hashedPassword = await bcrypt.hash(user.password, env.BCRYPT_SALT_ROUNDS);
-  
+      const hashedPassword = await this.hashProvider.hash(user.password)  
+
       await this.userRepository.create(
         User.create(user.name, user.email, hashedPassword),
       );
