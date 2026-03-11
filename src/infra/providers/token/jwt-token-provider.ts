@@ -7,4 +7,14 @@ export default class JwtProvider implements IJwtProvider{
     const token = jwt.sign({ userId: value }, env.JWT_SECRET, { expiresIn: "1h" });
     return token
     }
+    public async verify(value: string): Promise<any>{
+        try {
+        const tokenVerified = jwt.verify(value, env.JWT_SECRET);
+        return tokenVerified
+    } catch(error)
+        {
+            return(`Invalid token. Error message: ${error}`)
+        }
+
+    }
 }

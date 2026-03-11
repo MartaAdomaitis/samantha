@@ -1,11 +1,11 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { User } from "../../../domain/entities/user";
-import GetUserFactory from "../../factories/get-user-factory";
-import CreateUserFactory from "../../factories/create-user-factory";
-import UpdateUserFactory from "../../factories/update-user-factory";
-import DeleteUserFactory from "../../factories/delete-user-factory";
-import GetAllUserFactory from "../../factories/get-all-user-factory";
-import LoginFactory from "../../factories/login-factory";
+import GetUserFactory from "../../factories/users/get-user-factory";
+import CreateUserFactory from "../../factories/users/create-user-factory";
+import UpdateUserFactory from "../../factories/users/update-user-factory";
+import DeleteUserFactory from "../../factories/users/delete-user-factory";
+import GetAllUserFactory from "../../factories/users/get-all-user-factory";
+import LoginFactory from "../../factories/users/login-factory";
 
 export interface ILoginBody {
   email: string;

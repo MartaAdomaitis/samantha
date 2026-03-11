@@ -13,15 +13,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Message {
+  id        String   @id
+  userId    String
+  body      String
+  senderType      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("messages")
+}
+
 model User {
   id        String   @id
   email     String   @unique
   name      String
   password  String
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 
   tokens    Token[]
+  messages  Message[]
 
   @@map("users")
 }
@@ -31,6 +47,7 @@ model Token {
   userId    String
   token     String   @unique
   createdAt DateTime @default(now())
+  deletedAt DateTime?
 
   user      User     @relation(fields: [userId], references: [id])
 

@@ -1,6 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { env } from "../../config/env";
-import jwt from "jsonwebtoken";
+import JwtProvider from "../../providers/token/jwt-token-provider";
 
 export default async function AuthenticationMiddleware(request: FastifyRequest, reply: FastifyReply) {
   const authHeader = request.headers.authorization;
@@ -12,7 +11,7 @@ export default async function AuthenticationMiddleware(request: FastifyRequest, 
   const token = authHeader.replace('Bearer ', '');
 
   try {
-    jwt.verify(token, env.JWT_SECRET);
+    await new JwtProvider().verify(token);
   } catch (error) {
     return reply.status(401).send({ error: "Invalid token" });
   }
